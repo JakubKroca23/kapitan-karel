@@ -167,13 +167,19 @@
   color: var(--kk-text);
 }
 
+.kk-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.kk-new,
 .kk-close {
   border: 1px solid var(--kk-border);
   background: var(--kk-panel);
   color: var(--kk-text);
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
   line-height: 1;
   min-width: 32px;
   height: 32px;
@@ -183,7 +189,29 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.kk-new {
+  padding: 0;
+  width: 32px;
+  color: var(--kk-muted);
+}
+
+.kk-new:hover:not(:disabled) {
+  color: var(--kk-text);
+  border-color: var(--kk-accent);
+  background: rgba(47, 111, 237, 0.12);
+}
+
+.kk-new:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.kk-close {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .kk-close:hover {
@@ -255,11 +283,49 @@
   font-size: 13px;
 }
 
-.kk-typing {
-  align-self: flex-start;
-  color: var(--kk-muted);
-  font-size: 13px;
-  padding: 4px 8px;
+.kk-welcome .kk-msg-assistant {
+  border-color: rgba(47, 111, 237, 0.45);
+}
+
+.kk-msg-typing {
+  min-height: 20px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.kk-typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kk-typing-dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--kk-muted);
+  animation: kk-typing-bounce 1.2s ease-in-out infinite;
+}
+
+.kk-typing-dots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.kk-typing-dots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes kk-typing-bounce {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
 }
 
 .kk-form {

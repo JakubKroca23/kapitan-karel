@@ -69,6 +69,7 @@ If the proxy runs in Docker on the same network as Ollama, set e.g. `OLLAMA_BASE
 | `data-model` | Ollama model name |
 | `data-title` | Panel title (default: Kapitán Karel) |
 | `data-system` | Optional system prompt |
+| `data-welcome` | Fallback greeting if model welcome fails |
 
 ## API
 

@@ -20,8 +20,9 @@ function readConfig(): WidgetConfig {
   const system =
     script?.dataset.system ||
     "Jsi Kapitán Karel, přátelský pirátský robot-asistent za volantem. Odpovídej stručně česky.";
+  const welcome = script?.dataset.welcome || undefined;
 
-  return { api, model, title, system };
+  return { api, model, title, system, welcome };
 }
 
 function boot(): void {
