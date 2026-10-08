@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kapitan Karel — demo chat widget</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Georgia, "Times New Roman", serif;
+        background:
+          radial-gradient(ellipse at 20% 0%, #2a3a2e 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 100%, #1a2a3a 0%, transparent 45%),
+          #12161c;
+        color: #e6ebe4;
+      }
+      main {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 64px 24px;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        margin: 0 0 12px;
+      }
+      p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #a8b4a8;
+        max-width: 36ch;
+      }
+      code {
+        font-family: ui-monospace, monospace;
+        font-size: 0.9em;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Kapitan Karel</h1>
+      <p>
+        Ukázková stránka s embeddable chat widgetem napojeným na lokální
+        Ollama. Otevřete bublinu vpravo dole.
+      </p>
+      <p>
+        Vložení: <code>&lt;script src="…/widget.js" data-api="…"&gt;</code>
+      </p>
+    </main>
+
+    <script
+      src="/widget.js"
+      data-model="llama3.2"
+      data-title="Asistent"
+      data-system="Jsi užitečný asistent. Odpovídej stručně česky."
+      async
+    ></script>
+  </body>
+</html>
