@@ -3,11 +3,12 @@ import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  checkOllamaHealth,
+  checkChatHealth,
+  getChatProvider,
   getDefaultModel,
   streamChat,
-  type ChatMessage,
-} from "./ollama.js";
+} from "./chat.js";
+import type { ChatMessage } from "./types.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT ?? 3000);
@@ -29,12 +30,8 @@ app.use(express.static(publicDir));
 app.use(express.static(widgetDist));
 
 app.get("/api/health", async (_req, res) => {
-  const health = await checkOllamaHealth();
-  res.status(health.ok ? 200 : 503).json({
-    ...health,
-    defaultModel: getDefaultModel(),
-    ollamaBaseUrl: process.env.OLLAMA_BASE_URL ?? "http://127.0.0.1:11434",
-  });
+  const health = await checkChatHealth();
+  res.status(health.ok ? 200 : 503).json(health);
 });
 
 app.post("/api/chat", async (req, res) => {
@@ -60,7 +57,7 @@ app.post("/api/chat", async (req, res) => {
   try {
     const upstream = await streamChat({ messages, model });
     if (!upstream.body) {
-      res.status(502).json({ error: "empty response from Ollama" });
+      res.status(502).json({ error: "empty response from provider" });
       return;
     }
 
@@ -114,6 +111,7 @@ app.get("/widget.js", (_req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Chat proxy listening on http://localhost:${PORT}`);
+  console.log(`Provider: ${getChatProvider()} · model: ${getDefaultModel()}`);
   console.log(`Demo: http://localhost:${PORT}/demo.html`);
   console.log(`Widget: http://localhost:${PORT}/widget.js`);
 });

@@ -47,7 +47,8 @@
       <h1>Kapitán Karel</h1>
       <p>
         Ukázková stránka s embeddable chat widgetem napojeným na lokální
-        Ollama. Otevřete bublinu vpravo dole.
+        Ollama. Otevřete bublinu vpravo dole — uvítání je pevné, s rychlými
+        tlačítky.
       </p>
       <p>
         Vložení: <code>&lt;script src="…/widget.js" data-api="…"&gt;</code>
@@ -56,9 +57,11 @@
 
     <script
       src="/widget.js"
-      data-model="qwen2.5:3b"
+      data-model="qwen2.5:3b-32k"
       data-title="Kapitán Karel"
-      data-system="Jsi Kapitán Karel, přátelský pirátský robot-asistent za volantem. Odpovídej stručně česky."
+      data-welcome="Ahoj — jsem Kapitán Karel. Vidím obsah této stránky a pomůžu s orientací. Níže jsou rychlé volby."
+      data-actions='[{"label":"Co je na této stránce?","prompt":"Stručně shrň obsah této stránky."},{"label":"Jak se vložím?","prompt":"Jak se tento widget vloží do webu?"}]'
+      data-system="Jsi Kapitán Karel, věcný asistent. Odpovídej stručně česky podle živého kontextu stránky."
       async
     ></script>
   </body>
