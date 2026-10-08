@@ -10,8 +10,6 @@ export type ChatMessage = {
   content: string;
 };
 
-const CHAT_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm2 4v2h12V8H6zm0 4v2h8v-2H6z"/></svg>`;
-
 export function createWidget(config: WidgetConfig, styles: string): void {
   if (document.getElementById("kk-chat-root")) return;
 
@@ -19,15 +17,22 @@ export function createWidget(config: WidgetConfig, styles: string): void {
   styleEl.textContent = styles;
   document.head.appendChild(styleEl);
 
+  const iconUrl = `${config.api.replace(/\/$/, "")}/karel-pirate.png`;
+
   const root = document.createElement("div");
   root.id = "kk-chat-root";
   root.className = "kk-root";
   root.innerHTML = `
-    <button type="button" class="kk-launcher" aria-label="Open chat">${CHAT_ICON}</button>
+    <button type="button" class="kk-launcher" aria-label="Otevřít chat Kapitán Karel">
+      <img class="kk-launcher-img" alt="Kapitán Karel" />
+    </button>
     <div class="kk-panel" hidden>
       <div class="kk-header">
-        <h2 class="kk-title"></h2>
-        <button type="button" class="kk-close" aria-label="Close chat">×</button>
+        <div class="kk-brand">
+          <img class="kk-avatar" alt="" />
+          <h2 class="kk-title"></h2>
+        </div>
+        <button type="button" class="kk-close" aria-label="Zavřít chat">×</button>
       </div>
       <div class="kk-messages" role="log" aria-live="polite"></div>
       <form class="kk-form">
@@ -42,12 +47,16 @@ export function createWidget(config: WidgetConfig, styles: string): void {
   const panel = root.querySelector<HTMLDivElement>(".kk-panel")!;
   const closeBtn = root.querySelector<HTMLButtonElement>(".kk-close")!;
   const titleEl = root.querySelector<HTMLHeadingElement>(".kk-title")!;
+  const launcherImg = root.querySelector<HTMLImageElement>(".kk-launcher-img")!;
+  const avatarImg = root.querySelector<HTMLImageElement>(".kk-avatar")!;
   const messagesEl = root.querySelector<HTMLDivElement>(".kk-messages")!;
   const form = root.querySelector<HTMLFormElement>(".kk-form")!;
   const input = root.querySelector<HTMLTextAreaElement>(".kk-input")!;
   const sendBtn = root.querySelector<HTMLButtonElement>(".kk-send")!;
 
   titleEl.textContent = config.title;
+  launcherImg.src = iconUrl;
+  avatarImg.src = iconUrl;
 
   const history: ChatMessage[] = [];
   if (config.system) {

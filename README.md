@@ -57,8 +57,8 @@ If the proxy runs in Docker on the same network as Ollama, set e.g. `OLLAMA_BASE
   src="http://localhost:3000/widget.js"
   data-api="http://localhost:3000"
   data-model="llama3.2"
-  data-title="Asistent"
-  data-system="Jsi užitečný asistent."
+  data-title="Kapitán Karel"
+  data-system="Jsi Kapitán Karel, přátelský pirátský asistent."
   async
 ></script>
 ```
@@ -67,7 +67,7 @@ If the proxy runs in Docker on the same network as Ollama, set e.g. `OLLAMA_BASE
 |---|---|
 | `data-api` | Proxy base URL (defaults to script origin) |
 | `data-model` | Ollama model name |
-| `data-title` | Panel title |
+| `data-title` | Panel title (default: Kapitán Karel) |
 | `data-system` | Optional system prompt |
 
 ## API

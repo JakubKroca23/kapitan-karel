@@ -16,8 +16,10 @@ function readConfig(): WidgetConfig {
     script?.dataset.api ||
     (script?.src ? new URL(script.src).origin : window.location.origin);
   const model = script?.dataset.model || "llama3.2";
-  const title = script?.dataset.title || "Asistent";
-  const system = script?.dataset.system || undefined;
+  const title = script?.dataset.title || "Kapitán Karel";
+  const system =
+    script?.dataset.system ||
+    "Jsi Kapitán Karel, přátelský pirátský robot-asistent za volantem. Odpovídej stručně česky.";
 
   return { api, model, title, system };
 }

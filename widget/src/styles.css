@@ -1,15 +1,15 @@
 .kk-root {
-  --kk-bg: #0f1419;
-  --kk-panel: #1a222c;
-  --kk-border: #2a3542;
-  --kk-text: #e8eef4;
-  --kk-muted: #8b9aab;
-  --kk-accent: #3d9b7a;
-  --kk-accent-hover: #4cb08c;
-  --kk-user: #243447;
-  --kk-bot: #1e2834;
+  --kk-bg: #1a1d22;
+  --kk-panel: #2b2f36;
+  --kk-border: #3a404a;
+  --kk-text: #ffffff;
+  --kk-muted: #a8aeb8;
+  --kk-accent: #2f6fed;
+  --kk-accent-hover: #4a84f5;
+  --kk-user: #2f6fed;
+  --kk-bot: #23272e;
   --kk-danger: #e06c75;
-  --kk-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --kk-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   --kk-radius: 14px;
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   font-size: 14px;
@@ -29,34 +29,55 @@
   right: 20px;
   bottom: 20px;
   z-index: 2147483000;
-  width: 56px;
-  height: 56px;
-  border: none;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 2px solid var(--kk-accent);
   border-radius: 50%;
-  background: var(--kk-accent);
-  color: #fff;
+  background: var(--kk-panel);
   cursor: pointer;
   box-shadow: var(--kk-shadow);
-  display: grid;
-  place-items: center;
-  transition: background 0.15s ease, transform 0.15s ease;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .kk-launcher:hover {
-  background: var(--kk-accent-hover);
-  transform: scale(1.04);
+  transform: scale(1.05);
+  border-color: var(--kk-accent-hover);
+  box-shadow: 0 14px 44px rgba(47, 111, 237, 0.35);
 }
 
-.kk-launcher svg {
-  width: 26px;
-  height: 26px;
-  fill: currentColor;
+.kk-launcher-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #ffffff;
+  padding: 4px;
+}
+
+.kk-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.kk-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: contain;
+  border: 1px solid var(--kk-accent);
+  flex-shrink: 0;
+  background: #ffffff;
+  padding: 2px;
 }
 
 .kk-panel {
   position: fixed;
   right: 20px;
-  bottom: 88px;
+  bottom: 96px;
   z-index: 2147483000;
   width: min(380px, calc(100vw - 24px));
   height: min(560px, calc(100vh - 120px));
@@ -87,6 +108,7 @@
   margin: 0;
   font-size: 15px;
   font-weight: 600;
+  color: var(--kk-text);
 }
 
 .kk-close {
@@ -112,7 +134,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: linear-gradient(180deg, #121820 0%, #161d26 100%);
+  background: var(--kk-bg);
 }
 
 .kk-msg {
@@ -126,12 +148,14 @@
 .kk-msg-user {
   align-self: flex-end;
   background: var(--kk-user);
-  border: 1px solid #31485f;
+  color: #ffffff;
+  border: 1px solid transparent;
 }
 
 .kk-msg-assistant {
   align-self: flex-start;
   background: var(--kk-bot);
+  color: var(--kk-text);
   border: 1px solid var(--kk-border);
 }
 
@@ -172,6 +196,10 @@
   outline: none;
 }
 
+.kk-input::placeholder {
+  color: var(--kk-muted);
+}
+
 .kk-input:focus {
   border-color: var(--kk-accent);
 }
@@ -181,7 +209,7 @@
   border-radius: 10px;
   padding: 0 14px;
   background: var(--kk-accent);
-  color: #fff;
+  color: #ffffff;
   font: inherit;
   font-weight: 600;
   cursor: pointer;
