@@ -25,26 +25,42 @@
 }
 
 .kk-launcher {
+  --kk-launcher-size: 48px;
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 16px;
+  bottom: 16px;
   z-index: 2147483000;
-  width: 64px;
-  height: 64px;
+  width: var(--kk-launcher-size);
+  height: var(--kk-launcher-size);
   padding: 0;
-  border: 2px solid var(--kk-accent);
-  border-radius: 50%;
-  background: var(--kk-panel);
+  border: none;
+  border-radius: 0;
+  background: transparent;
   cursor: pointer;
-  box-shadow: var(--kk-shadow);
-  overflow: hidden;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  box-shadow: none;
+  overflow: visible;
+  transition: transform 0.2s ease, filter 0.2s ease, opacity 0.35s ease;
 }
 
 .kk-launcher:hover {
-  transform: scale(1.05);
-  border-color: var(--kk-accent-hover);
-  box-shadow: 0 14px 44px rgba(47, 111, 237, 0.35);
+  transform: scale(1.08);
+  filter: drop-shadow(0 6px 12px rgba(47, 111, 237, 0.35));
+}
+
+.kk-launcher.kk-launcher-behind {
+  pointer-events: none;
+  z-index: 2147482999;
+  transform: scale(0.96);
+  opacity: 0.5;
+  transition:
+    transform 0.3s cubic-bezier(0.33, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.33, 0, 0.2, 1),
+    filter 0.3s cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.kk-launcher.kk-launcher-rise {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .kk-launcher-img {
@@ -52,8 +68,9 @@
   height: 100%;
   object-fit: contain;
   display: block;
-  background: #ffffff;
-  padding: 4px;
+  background: transparent;
+  padding: 0;
+  pointer-events: none;
 }
 
 .kk-brand {
@@ -64,23 +81,23 @@
 }
 
 .kk-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   object-fit: contain;
-  border: 1px solid var(--kk-accent);
+  border: none;
   flex-shrink: 0;
-  background: #ffffff;
-  padding: 2px;
+  background: transparent;
+  padding: 0;
 }
 
 .kk-panel {
   position: fixed;
-  right: 20px;
-  bottom: 96px;
-  z-index: 2147483000;
-  width: min(380px, calc(100vw - 24px));
-  height: min(560px, calc(100vh - 120px));
+  right: 36px;
+  bottom: 40px;
+  z-index: 2147483001;
+  width: min(380px, calc(100vw - 48px));
+  height: min(560px, calc(100vh - 56px));
   background: var(--kk-panel);
   border: 1px solid var(--kk-border);
   border-radius: var(--kk-radius);
@@ -88,10 +105,49 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transform-origin: calc(100% - 8px) calc(100% - 8px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(28px, 34px) scale(0.18);
+  transition:
+    opacity 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.38s,
+    border-radius 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
 }
 
-.kk-panel[hidden] {
-  display: none !important;
+.kk-panel.kk-panel-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(0, 0) scale(1);
+  border-radius: var(--kk-radius);
+  transition:
+    opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.38s,
+    border-radius 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kk-panel.kk-panel-closing {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(28px, 34px) scale(0.18);
+  transition:
+    opacity 0.26s cubic-bezier(0.4, 0, 1, 1),
+    transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.32s,
+    border-radius 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kk-panel .kk-header,
+.kk-panel .kk-messages,
+.kk-panel .kk-form {
+  opacity: 1;
+  transform: none;
 }
 
 .kk-header {
@@ -112,19 +168,28 @@
 }
 
 .kk-close {
-  border: none;
-  background: transparent;
-  color: var(--kk-muted);
+  border: 1px solid var(--kk-border);
+  background: var(--kk-panel);
+  color: var(--kk-text);
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1;
-  padding: 4px 8px;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
   border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .kk-close:hover {
-  color: var(--kk-text);
-  background: var(--kk-border);
+  color: #ffffff;
+  background: #d64545;
+  border-color: #d64545;
 }
 
 .kk-messages {
@@ -143,6 +208,29 @@
   border-radius: 12px;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.kk-msg-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 95%;
+}
+
+.kk-msg-row-assistant {
+  align-self: flex-start;
+}
+
+.kk-msg-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.kk-msg-row .kk-msg {
+  max-width: 100%;
 }
 
 .kk-msg-user {

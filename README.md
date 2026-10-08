@@ -19,7 +19,7 @@ Example Docker:
 
 ```bash
 docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
-docker exec -it ollama ollama pull llama3.2
+docker exec -it ollama ollama pull qwen2.5:3b
 ```
 
 ## Setup
@@ -45,7 +45,7 @@ npm start
 |---|---|---|
 | `PORT` | `3000` | Proxy listen port |
 | `OLLAMA_BASE_URL` | `http://127.0.0.1:11434` | Ollama base URL |
-| `DEFAULT_MODEL` | `llama3.2` | Fallback model name |
+| `DEFAULT_MODEL` | `qwen2.5:3b` | Fallback model name |
 | `CORS_ORIGIN` | `*` | Comma-separated origins, or `*` |
 
 If the proxy runs in Docker on the same network as Ollama, set e.g. `OLLAMA_BASE_URL=http://ollama:11434`.
@@ -56,7 +56,7 @@ If the proxy runs in Docker on the same network as Ollama, set e.g. `OLLAMA_BASE
 <script
   src="http://localhost:3000/widget.js"
   data-api="http://localhost:3000"
-  data-model="llama3.2"
+  data-model="qwen2.5:3b"
   data-title="Kapitán Karel"
   data-system="Jsi Kapitán Karel, přátelský pirátský asistent."
   async

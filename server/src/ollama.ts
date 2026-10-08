@@ -16,7 +16,7 @@ function getBaseUrl(): string {
 }
 
 export function getDefaultModel(): string {
-  return process.env.DEFAULT_MODEL ?? "llama3.2";
+  return process.env.DEFAULT_MODEL ?? "qwen2.5:3b";
 }
 
 export async function checkOllamaHealth(): Promise<{

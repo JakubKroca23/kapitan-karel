@@ -15,7 +15,7 @@ function readConfig(): WidgetConfig {
   const api =
     script?.dataset.api ||
     (script?.src ? new URL(script.src).origin : window.location.origin);
-  const model = script?.dataset.model || "llama3.2";
+  const model = script?.dataset.model || "qwen2.5:3b";
   const title = script?.dataset.title || "Kapitán Karel";
   const system =
     script?.dataset.system ||
